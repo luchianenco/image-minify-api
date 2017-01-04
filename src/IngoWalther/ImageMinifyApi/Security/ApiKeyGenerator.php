@@ -23,7 +23,9 @@ class ApiKeyGenerator
 
     /**
      * ApiKeyGenerator constructor.
-     * @param Connection $connection
+     * @param UserRepository $userRepository
+     * @param RandomStringGenerator $randomStringGenerator
+     * @internal param Connection $connection
      */
     public function __construct(UserRepository $userRepository, RandomStringGenerator $randomStringGenerator)
     {
@@ -33,9 +35,10 @@ class ApiKeyGenerator
 
     /**
      * @param $username
+     * @param array $quotaParams
      * @return string
      */
-    public function generate($username)
+    public function generate($username, array $quotaParams)
     {
         $this->checkUsername($username);
 
@@ -43,12 +46,13 @@ class ApiKeyGenerator
             $key = $this->randomStringGenerator->generate();
         } while (!$this->checkKey($key));
 
-        $this->userRepository->addUser($username, $key);
+        $this->userRepository->addUser($username, $key, $quotaParams);
         return $key;
     }
 
     /**
      * @param $username
+     * @throws \Symfony\Component\Config\Definition\Exception\Exception
      */
     private function checkUsername($username)
     {

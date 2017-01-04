@@ -37,7 +37,7 @@ class ListUserCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $table = new Table($output);
-        $table->setHeaders(['ID', 'Username', 'API-Key'])
+        $table->setHeaders(['ID', 'Username', 'API-Key', 'Quota Per Month', 'Quota Per Day', 'Quota Per Hour'])
              ->addRows($this->userRepository->findAll());
 
         $table->render();

@@ -46,11 +46,14 @@ class UserRepository extends AbstractRepository
     /**
      * @param $username
      * @param $key
+     * @param array $quotaParams
      */
-    public function addUser($username, $key)
+    public function addUser($username, $key, array $quotaParams)
     {
-        $statement = $this->connection->prepare('INSERT INTO `user` (`id`, `name`, `api_key`) VALUES (NULL, ?, ?)');
-        $statement->execute(array($username, $key));
+        $statement = $this->connection->prepare(
+            'INSERT INTO `user` (`id`, `name`, `api_key`, `quota_per_month`, `quota_per_day`, `quota_per_hour`) '.
+            'VALUES (NULL, ?, ?, ?, ?, ?)');
+        $statement->execute(array($username, $key, $quotaParams['month'], $quotaParams['day'], $quotaParams['hour']));
     }
 
 }

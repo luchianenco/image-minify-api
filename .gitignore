@@ -1,0 +1,7 @@
+# Logs
+/log/
+# Vendors
+/vendor/
+
+
+config/parameters.yml

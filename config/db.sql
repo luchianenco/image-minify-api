@@ -11,6 +11,9 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   `api_key` varchar(32) NOT NULL,
+  `quota_per_month` int(11) NOT NULL DEFAULT 0,
+  `quota_per_day` int(11) NOT NULL DEFAULT 0,
+  `quota_per_hour` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

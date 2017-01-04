@@ -28,16 +28,18 @@ class ApiKeyCheck
     /**
      * Checks for valid API-Key
      * @param string $apiKey
+     * @return array|bool
      */
     public function check($apiKey)
     {
-        $user = $this->isKeyValid($apiKey);
-        return $user;
+        return $this->isKeyValid($apiKey);
     }
 
     /**
      * Checks if API-Key is valid
      * @param string $apiKey
+     * @return array|bool
+     * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
      */
     private function isKeyValid($apiKey)
     {
