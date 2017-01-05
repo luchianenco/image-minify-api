@@ -25,7 +25,8 @@ abstract class AbstractRepository
     }
 
     /**
-     * @param int $fetchType
+     * @param int $fetchMode
+     * @return array
      */
     public function findAll($fetchMode = \PDO::FETCH_ASSOC)
     {
@@ -40,7 +41,7 @@ abstract class AbstractRepository
      * @return array
      * @throws \Doctrine\DBAL\DBALException
      */
-    protected function fetch($query, $params = array(), $fetchMode= \PDO::FETCH_ASSOC)
+    protected function fetch($query, array $params = array(), $fetchMode= \PDO::FETCH_ASSOC)
     {
         $statement = $this->connection->prepare($query);
         $statement->execute($params);

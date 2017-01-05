@@ -29,6 +29,7 @@ class ApiKeyCheck
      * Checks for valid API-Key
      * @param string $apiKey
      * @return array|bool
+     * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
      */
     public function check($apiKey)
     {

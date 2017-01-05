@@ -3,7 +3,6 @@
 namespace IngoWalther\ImageMinifyApi\Security;
 
 use IngoWalther\ImageMinifyApi\Database\UserRepository;
-use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Class ApiKeyGenerator
@@ -52,13 +51,13 @@ class ApiKeyGenerator
 
     /**
      * @param $username
-     * @throws \Symfony\Component\Config\Definition\Exception\Exception
+     * @throws \LogicException
      */
     private function checkUsername($username)
     {
         $user = $this->userRepository->findUserByName($username);
         if ($user) {
-            throw new Exception('This username is taken');
+            throw new \LogicException('This username is taken');
         }
     }
 

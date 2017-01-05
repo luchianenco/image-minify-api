@@ -6,6 +6,12 @@ use IngoWalther\ImageMinifyApi\Security\ApiKeyGenerator;
 
 class ApiKeyGeneratorTest extends \PHPUnit_Framework_TestCase
 {
+    private $quotaParams = [
+        'month' => 1500,
+        'day' => 50,
+        'hour' => 10
+    ];
+
     /**
      * @var ApiKeyGenerator
      */
@@ -42,8 +48,8 @@ class ApiKeyGeneratorTest extends \PHPUnit_Framework_TestCase
             ->with($username)
             ->will($this->returnValue(array('user' => 'peter')));
 
-        $this->setExpectedException('Exception');
-        $this->object->generate($username);
+        $this->setExpectedException('LogicException');
+        $this->object->generate($username, $this->quotaParams);
     }
 
     public function testWithFreeUsername()
@@ -86,7 +92,7 @@ class ApiKeyGeneratorTest extends \PHPUnit_Framework_TestCase
             ->method('addUser')
             ->with('free', 'freeKey');
 
-        $key = $this->object->generate($username);
+        $key = $this->object->generate($username, $this->quotaParams);
 
         $this->assertEquals('freeKey', $key);
     }
